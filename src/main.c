@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:37:10 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/16 15:53:55 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/18 14:07:04 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -45,13 +45,33 @@
 int	put_game_field(t_window *window)
 {
 	int	i;
+	int	j;
+	int	x;
+	int	y;
 
 	i = 0;
+	j = 0;
+	x = 0;
+	y = 0;
+	// while (i < window->game_field->height)
+	// {
+	// 	mlx_string_put(window->mlx_ptr, window->win_ptr,
+	// 		10, (10 + i) * 10, 0x000000FF,
+	// 		window->game_field->game_field[i]);
+	// 	i++;
+	// }
 	while (i < window->game_field->height)
 	{
-		mlx_string_put(window->mlx_ptr, window->win_ptr,
-			10, (10 + i) * 10, 0x000000FF,
-			window->game_field->game_field[i]);
+		while (j < window->game_field->width)
+		{
+			mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
+				window->game_field->game_field_imgs[i][j].img_ptr, x, y);
+			j++;
+			x += 50;
+		}
+		x = 0;
+		y += 50;
+		j = 0;
 		i++;
 	}
 	return (0);

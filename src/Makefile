@@ -4,7 +4,7 @@ NAME = so_long.a
 FTLIBFTNAME = libft_ft.a
 CC = cc
 LIBC = ar rcs
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 LIBFTDIR = ../ft_libft
 
 .c.o:
