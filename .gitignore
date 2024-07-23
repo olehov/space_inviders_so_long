@@ -4,6 +4,13 @@
 # Ignore minilibx-linux directory
 minilibx-linux/
 
+# Ignore png and xpm folders
+textures/png
+textures/xpm50x50
+textures/xpm100x100
+
+*.txt
+
 # Ignore build and output files
 *.o
 *.out
