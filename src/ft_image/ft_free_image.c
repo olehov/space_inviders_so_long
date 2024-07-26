@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:48:21 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/23 14:46:26 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:44:41 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,6 +21,10 @@ void	ft_free_image(void *mlx_ptr, t_image *image)
 	{
 		return ;
 	}
-	mlx_destroy_image(mlx_ptr, image->img_ptr);
+	if (image->img_ptr != NULL)
+	{
+		mlx_destroy_image(mlx_ptr, image->img_ptr);
+	}
+	free(image);
 	// free(image);
 }

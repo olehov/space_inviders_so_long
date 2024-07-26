@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:58:43 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/23 14:48:16 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/26 12:56:43 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -23,7 +23,8 @@ t_image	*ft_new_image(void *mlx_ptr, char *path)
 	{
 		return (NULL);
 	}
-	img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path, IMAGE_SIZE, IMAGE_SIZE);
+	img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path,
+			&img->width, &img->height);
 	if (img->img_ptr == NULL)
 	{
 		free(img);

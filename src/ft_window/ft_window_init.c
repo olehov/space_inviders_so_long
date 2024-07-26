@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:41:20 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/23 14:49:34 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/26 15:29:07 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -40,12 +40,14 @@ t_window	*ft_window_init(int width, int height)
 	if (window->mlx_ptr == NULL)
 		return (free(window), NULL);
 	window->win_ptr = mlx_new_window(window->mlx_ptr, window->width,
-			window->height, "test");
+			window->height, "so_long");
 	if (window->win_ptr == NULL)
 		return (ft_clear_display(window), NULL);
 	window->game_field = ft_init_game_field(window->mlx_ptr,
 			"../maps/map1.ber");
 	if (window->game_field == NULL)
 		return (ft_clear_display(window), NULL);
+	window->background = ft_screen_background(window->mlx_ptr, window->width, window->height);
+	window->number_of_movements = 0;
 	return (window);
 }

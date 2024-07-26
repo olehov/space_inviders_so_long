@@ -6,15 +6,18 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:26:13 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/23 16:30:09 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/26 15:22:19 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #ifndef FT_TEXTURES_H
 # define FT_TEXTURES_H
 
+# define GREY_TEXT 0xE0E0E0
+
 /*Textures size*/
 # define IMAGE_SIZE 32
+# define START_POS_X 300
 
 /*Portal textures*/
 # define EXIT_PORTAL_1 "../textures/xpm/portal/portal0.xpm"
@@ -52,4 +55,5 @@
 # define EXPLOSION_4 "../textures/xpm/explosion/explosion_4.xpm"
 # define EXPLOSION_5 "../textures/xpm/explosion/explosion_5.xpm"
 
+# define WALL "../textures/xpm/wall.xpm"
 #endif

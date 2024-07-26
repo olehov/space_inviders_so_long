@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:47:19 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/23 14:43:59 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/24 16:29:39 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,7 +15,7 @@
 #include "../../ft_libft/headers/libft.h"
 #include "../minilibx-linux/mlx.h"
 
-static void	free_imgs(void *mlx_ptr, t_game_field *field)
+void	free_imgs(void *mlx_ptr, t_game_field *field)
 {
 	int	i;
 	int	j;
@@ -26,7 +26,6 @@ static void	free_imgs(void *mlx_ptr, t_game_field *field)
 	{
 		while (++j < field->width)
 		{
-			printf("freed i=%i j=%i\n", i, j);
 			if (field->game_field_imgs[i][j].img_ptr != NULL)
 				mlx_destroy_image(mlx_ptr,
 					field->game_field_imgs[i][j].img_ptr);
@@ -47,5 +46,7 @@ void	ft_free_game_field(void *mlx_ptr, t_game_field *field)
 		free_imgs(mlx_ptr, field);
 	if (field->exit_gate != NULL)
 		ft_free_exit_gate(mlx_ptr, field->exit_gate);
+	if (field->player != NULL)
+		ft_free_player(mlx_ptr, field->player);
 	free(field);
 }

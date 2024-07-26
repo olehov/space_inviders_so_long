@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:58:34 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/16 16:59:36 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/24 11:58:14 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -112,7 +112,6 @@ static int	ft_check_if_rectangle(t_game_field *game_field)
 		}
 		i++;
 	}
-	printf("rectangle passed\n");
 	return (1);
 }
 

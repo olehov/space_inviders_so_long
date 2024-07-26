@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ogrativ <ogrativ@student.42london.com      +#+  +:+       +#+        */
+/*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:12:17 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/09 13:12:20 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/24 15:32:07 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FT_POINT_H
 # define FT_POINT_H
@@ -31,6 +31,7 @@ Return values:
 int		ft_equal_pos(t_point *pos1, t_point *pos2);
 
 void	ft_set_position(t_point *point, int x, int y);
+
 void	ft_free_point(t_point *point);
 
 #endif
