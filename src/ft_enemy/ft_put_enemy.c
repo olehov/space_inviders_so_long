@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_window.c                                   :+:      :+:    :+:   */
+/*   ft_put_enemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 12:41:11 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:18:10 by ogrativ          ###   ########.fr       */
+/*   Created: 2024/07/30 11:56:19 by ogrativ           #+#    #+#             */
+/*   Updated: 2024/07/30 15:17:25 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../headers/ft_window.h"
 #include "../../headers/so_long.h"
-#include "../../ft_libft/headers/libft.h"
 
-void	ft_free_window(t_window *window)
+void	ft_put_enemy(t_window *window)
 {
-	if (window == NULL)
+	t_enemy	*enemy;
+	t_list	*tmp;
+
+	tmp = window->game_field->enemys;
+	while (tmp != NULL)
 	{
-		return ;
+		enemy = tmp->content;
+		mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
+			enemy->enemy_img->img_ptr, enemy->enemy_img->pos.x,
+			enemy->enemy_img->pos.y);
+		tmp = tmp->next;
 	}
-	if (window->mlx_ptr != NULL)
-	{
-		free(window->mlx_ptr);
-	}
-	if (window->game_field != NULL)
-	{
-		ft_free_game_field(window->mlx_ptr, window->game_field);
-	}
-	free(window);
 }

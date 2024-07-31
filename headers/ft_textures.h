@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_textures.h                                      :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:26:13 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/26 15:22:19 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:21:52 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef FT_TEXTURES_H
 # define FT_TEXTURES_H
@@ -54,6 +54,8 @@
 # define EXPLOSION_3 "../textures/xpm/explosion/explosion_3.xpm"
 # define EXPLOSION_4 "../textures/xpm/explosion/explosion_4.xpm"
 # define EXPLOSION_5 "../textures/xpm/explosion/explosion_5.xpm"
+
+# define COLLECTIBLE "../textures/xpm/collectible.xpm"
 
 # define WALL "../textures/xpm/wall.xpm"
 #endif

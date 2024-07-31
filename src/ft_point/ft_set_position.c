@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ogrativ <ogrativ@student.42london.com      +#+  +:+       +#+        */
+/*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:05:41 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/10 15:05:43 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:18:05 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_exit_gate_init.c                                :+:      :+:    :+:   */
@@ -6,12 +6,10 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:55:10 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/24 15:48:23 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:33:56 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-// #include "../../headers/ft_game_exit.h"
-// #include "../../headers/ft_game_field.h"
 #include "../../headers/so_long.h"
 #include "../minilibx-linux/mlx.h"
 
@@ -53,6 +51,6 @@ t_exit	*ft_exit_gate_init(void *mlx_ptr, t_game_field *game_field)
 			&size, &size);
 	if (exit_gate->sprite[2] == NULL)
 		return (free_sprite(mlx_ptr, exit_gate), free(exit_gate), NULL);
-	exit_gate->is_visible = 1;
+	exit_gate->is_visible = 0;
 	return (exit_gate);
 }

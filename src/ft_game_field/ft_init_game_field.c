@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_init_game_field.c                               :+:      :+:    :+:   */
@@ -6,11 +6,10 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:10:58 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/26 16:03:47 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:23:59 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-// #include "../../headers/ft_game_field.h"
 #include "../../ft_libft/headers/libft.h"
 #include "../../headers/so_long.h"
 #include <unistd.h>
@@ -50,16 +49,6 @@ static t_image	**allocate_field_img(int width, int height)
 		i++;
 	}
 	return (field_imgs);
-}
-
-static t_image	*init_player(void *mlx_ptr, t_game_field *game_field,
-	int i, int j)
-{
-	if (game_field->game_field[i][j] == _player_start_pos)
-	{
-		return (ft_new_image(mlx_ptr, PLAYER_SPACESHIP));
-	}
-	return (NULL);
 }
 
 static t_image	*init_borders(void *mlx_ptr, t_game_field *game_field,
@@ -129,20 +118,20 @@ static t_game_field	*init_field(void *mlx_ptr, char *str, int counter)
 	game_field->height = counter;
 	game_field->width = ft_strlen(game_field->game_field[0]);
 	if (ft_check_valid_map(game_field) == -1)
-		return (ft_free_game_field(mlx_ptr, game_field), free(str), NULL);
+		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
 	game_field->game_field_imgs = init_field_imgs(mlx_ptr, game_field);
 	if (game_field->game_field_imgs == NULL)
-		return (ft_free_game_field(mlx_ptr, game_field), NULL);
+		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
 	game_field->exit_gate = ft_exit_gate_init(mlx_ptr, game_field);
 	if (game_field->exit_gate == NULL)
-		return (ft_free_game_field(mlx_ptr, game_field), NULL);
+		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
 	game_field->player = ft_player_init(mlx_ptr, game_field);
 	if (game_field->player == NULL)
-	{
-		return (ft_free_game_field(mlx_ptr, game_field), NULL);
-	}
-	free(str);
-	return (game_field);
+		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
+	game_field->enemys = ft_enemy_init(mlx_ptr, game_field);
+	if (game_field->enemys == NULL)
+		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
+	return (free(str), game_field);
 }
 
 t_game_field	*ft_init_game_field(void *mlx_ptr, const char *map_path)

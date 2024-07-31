@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_move_left.c                                     :+:      :+:    :+:   */
@@ -6,32 +6,32 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:20:28 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/26 15:47:32 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:17:51 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-static void	print_map(t_window *window)
-{
-	int	i;
-	int	j;
+// static void	print_map(t_window *window)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < window->game_field->height)
-	{
-		while (j < window->game_field->width)
-		{
-			printf("%c", window->game_field->game_field[i][j]);
-			j++;
-		}
-		printf("\n");
-		j = 0;
-		i++;
-	}
-	printf("\n");
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (i < window->game_field->height)
+// 	{
+// 		while (j < window->game_field->width)
+// 		{
+// 			printf("%c", window->game_field->game_field[i][j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		j = 0;
+// 		i++;
+// 	}
+// 	printf("\n");
+// }
 
 void	ft_move_left(t_window *window)
 {
@@ -52,6 +52,6 @@ void	ft_move_left(t_window *window)
 			window->game_field->player->player->pos.x - IMAGE_SIZE,
 			window->game_field->player->player->pos.y);
 		window->number_of_movements++;
-		print_map(window);
+		ft_printf("Number of movement: %i\n", window->number_of_movements);
 	}
 }

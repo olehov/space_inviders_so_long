@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_move.c                                          :+:      :+:    :+:   */
@@ -6,70 +6,85 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:32:45 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/26 17:45:50 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:27:15 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 
-static void	put_player_to_screen(t_window *window, t_image *background)
-{
-	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
-		window->game_field->player->player->img_ptr,
-		window->game_field->player->player->pos.x,
-		window->game_field->player->player->pos.y);
-}
-
-static void	move(t_window *window, void (*f)(t_window *))
-{
-	t_image	*background;
-
-	background = ft_new_image(window->mlx_ptr, BACKGROUND);
-	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
-		background->img_ptr, window->game_field->player->player->pos.x,
-		window->game_field->player->player->pos.y);
-	(*f)(window);
-	put_player_to_screen(window, background);
-	if (background != NULL)
-	{
-		ft_free_image(window->mlx_ptr, background);
-	}
-}
-
-// void	put_number_of_movements(t_window *window)
+// static void	print_map(t_window *window)
 // {
-// 	char	*str;
-// 	char	*n_of_m;
+// 	int	i;
+// 	int	j;
 
-// 	n_of_m = ft_itoa(window->number_of_movements);
-// 	str = ft_strjoin("NUMBER OF MOVEMENTS: ", n_of_m);
-// 	mlx_string_put(window->mlx_ptr, window->win_ptr, 10, 100,
-// 		GREY_TEXT, str);
-// 	free(str);
-// 	free(n_of_m);
+// 	i = 0;
+// 	j = 0;
+// 	while (i < window->game_field->height)
+// 	{
+// 		while (j < window->game_field->width)
+// 		{
+// 			printf("%c", window->game_field->game_field[i][j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		j = 0;
+// 		i++;
+// 	}
+// 	printf("\n");
 // }
+
+static int	is_died(t_window *window)
+{
+	t_enemy	*enemy;
+	t_list	*tmp;
+
+	tmp = window->game_field->enemys;
+	while (tmp != NULL)
+	{
+		enemy = tmp->content;
+		if (ft_equal_pos(&enemy->pos, &window->game_field->player->pos) == 1)
+		{
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+static int	move(t_window *window, void (*f)(t_window *))
+{
+	(*f)(window);
+	render_window(window);
+	if (ft_equal_pos(&window->game_field->player->pos,
+			&window->game_field->exit_gate->pos) == 1
+		&& window->game_field->exit_gate->is_visible == 1)
+	{
+		ft_printf("YOU WON!\n");
+		return (mlx_loop_end(window->mlx_ptr));
+	}
+	if (is_died(window) == 1)
+	{
+		ft_printf("YOU DIED!\n");
+		return (mlx_loop_end(window->mlx_ptr));
+	}
+	return (0);
+}
 
 int	ft_move(int key, t_window *window)
 {
 	if (key == XK_A || key == XK_a || key == XK_Left)
-		move(window, ft_move_left);
-	if (key == XK_D || key == XK_d || key == XK_Right)
-		move(window, ft_move_right);
-	if (key == XK_W || key == XK_w || key == XK_Up)
-		move(window, ft_move_up);
-	if (key == XK_S || key == XK_s || key == XK_Down)
-		move(window, ft_move_down);
-	if (key == XK_Escape)
-		return (ft_destroy_window(window));
-	if (ft_equal_pos(&window->game_field->player->pos,
-			&window->game_field->exit_gate->pos) == 1)
-	{
-		render_window(window);
-		printf("YOU WON\n");
-		ft_destroy_window(window);
-	}
-	render_window(window);
+		return (move(window, ft_move_left));
+	else if (key == XK_D || key == XK_d || key == XK_Right)
+		return (move(window, ft_move_right));
+	else if (key == XK_W || key == XK_w || key == XK_Up)
+		return (move(window, ft_move_up));
+	else if (key == XK_S || key == XK_s || key == XK_Down)
+		return (move(window, ft_move_down));
+	else if (key == XK_space)
+		return (move(window, ft_shoot));
+	else if (key == XK_Escape)
+		return (mlx_loop_end(window->mlx_ptr));
 	return (0);
 }

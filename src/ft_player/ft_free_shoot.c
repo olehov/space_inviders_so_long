@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_window.c                                   :+:      :+:    :+:   */
+/*   ft_free_shoot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 12:41:11 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:18:10 by ogrativ          ###   ########.fr       */
+/*   Created: 2024/07/30 14:12:45 by ogrativ           #+#    #+#             */
+/*   Updated: 2024/07/30 15:17:48 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../headers/ft_window.h"
 #include "../../headers/so_long.h"
-#include "../../ft_libft/headers/libft.h"
 
-void	ft_free_window(t_window *window)
+void	ft_free_shoot(void *mlx_ptr, t_shoot *shoot)
 {
-	if (window == NULL)
+	if (shoot == NULL)
 	{
 		return ;
 	}
-	if (window->mlx_ptr != NULL)
+	if (shoot->img != NULL)
 	{
-		free(window->mlx_ptr);
+		ft_free_image(mlx_ptr, shoot->img);
 	}
-	if (window->game_field != NULL)
-	{
-		ft_free_game_field(window->mlx_ptr, window->game_field);
-	}
-	free(window);
+	free(shoot);
 }

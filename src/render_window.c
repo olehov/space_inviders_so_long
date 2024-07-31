@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render_window.c                                    :+:      :+:    :+:   */
@@ -6,23 +6,11 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:50:41 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/26 16:07:57 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:29:19 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../headers/so_long.h"
-
-
-void	ft_wait(int counter)
-{
-	int	i;
-
-	i = 0;
-	while (i < counter)
-	{
-		i++;
-	}
-}
 
 void	put_number_of_movements(t_window *window)
 {
@@ -39,8 +27,8 @@ void	put_number_of_movements(t_window *window)
 
 void	render_window(t_window *window)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -61,4 +49,5 @@ void	render_window(t_window *window)
 	}
 	ft_put_player(window);
 	put_number_of_movements(window);
+	ft_put_enemy(window);
 }

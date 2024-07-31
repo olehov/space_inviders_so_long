@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_free_game_field.c                               :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:47:19 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/24 16:29:39 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:17:33 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 // #include "../../headers/ft_game_field.h"
 #include "../../headers/so_long.h"
@@ -48,5 +48,7 @@ void	ft_free_game_field(void *mlx_ptr, t_game_field *field)
 		ft_free_exit_gate(mlx_ptr, field->exit_gate);
 	if (field->player != NULL)
 		ft_free_player(mlx_ptr, field->player);
+	if (field->enemys != NULL)
+		ft_clear_lst_of_enemy(mlx_ptr, &field->enemys);
 	free(field);
 }

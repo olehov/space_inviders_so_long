@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_window_init.c                                   :+:      :+:    :+:   */
@@ -6,12 +6,10 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:41:20 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/26 15:29:07 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:18:11 by ogrativ          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-// #include "../../headers/ft_window.h"
-// #include "../../headers/ft_image.h"
 #include "../../headers/so_long.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -47,7 +45,8 @@ t_window	*ft_window_init(int width, int height)
 			"../maps/map1.ber");
 	if (window->game_field == NULL)
 		return (ft_clear_display(window), NULL);
-	window->background = ft_screen_background(window->mlx_ptr, window->width, window->height);
+	window->background = ft_screen_background(window->mlx_ptr,
+			window->width, window->height);
 	window->number_of_movements = 0;
 	return (window);
 }

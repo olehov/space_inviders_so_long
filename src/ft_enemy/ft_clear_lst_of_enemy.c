@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_window.c                                   :+:      :+:    :+:   */
+/*   ft_clear_lst_of_enemy.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 12:41:11 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:18:10 by ogrativ          ###   ########.fr       */
+/*   Created: 2024/07/29 15:42:13 by ogrativ           #+#    #+#             */
+/*   Updated: 2024/07/30 15:17:18 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../headers/ft_window.h"
 #include "../../headers/so_long.h"
-#include "../../ft_libft/headers/libft.h"
 
-void	ft_free_window(t_window *window)
+void	ft_clear_lst_of_enemy(void *mlx_ptr, t_list **lst)
 {
-	if (window == NULL)
+	t_list	*prev;
+
+	if ((*lst) == NULL)
 	{
 		return ;
 	}
-	if (window->mlx_ptr != NULL)
+	while (*lst != NULL)
 	{
-		free(window->mlx_ptr);
+		prev = *lst;
+		ft_free_enemy(mlx_ptr, (*lst)->content);
+		*lst = (*lst)->next;
+		free(prev);
 	}
-	if (window->game_field != NULL)
-	{
-		ft_free_game_field(window->mlx_ptr, window->game_field);
-	}
-	free(window);
 }
