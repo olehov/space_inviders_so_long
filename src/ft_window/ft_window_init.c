@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:41:20 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:18:11 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:58:30 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_clear_display(t_window *window)
 	free(window);
 }
 
-t_window	*ft_window_init(int width, int height)
+t_window	*ft_window_init(int width, int height, char *map_path)
 {
 	t_window	*window;
 
@@ -41,8 +41,7 @@ t_window	*ft_window_init(int width, int height)
 			window->height, "so_long");
 	if (window->win_ptr == NULL)
 		return (ft_clear_display(window), NULL);
-	window->game_field = ft_init_game_field(window->mlx_ptr,
-			"../maps/map1.ber");
+	window->game_field = ft_init_game_field(window->mlx_ptr, map_path);
 	if (window->game_field == NULL)
 		return (ft_clear_display(window), NULL);
 	window->background = ft_screen_background(window->mlx_ptr,

@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:50:41 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/31 16:29:19 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 13:52:15 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	render_window(t_window *window)
 	ft_put_player(window);
 	put_number_of_movements(window);
 	ft_put_enemy(window);
+	ft_put_collectible(window);
 }

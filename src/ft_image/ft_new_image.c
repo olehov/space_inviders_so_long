@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:58:43 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:17:38 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:48:50 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ t_image	*ft_new_image(void *mlx_ptr, char *path)
 	}
 	img->height = IMAGE_SIZE;
 	img->width = IMAGE_SIZE;
+	img->pos.x = 0;
+	img->pos.y = 0;
 	return (img);
 }

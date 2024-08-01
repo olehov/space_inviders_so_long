@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:47:19 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:17:33 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:05:23 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	ft_free_game_field(void *mlx_ptr, t_game_field *field)
 		ft_free_player(mlx_ptr, field->player);
 	if (field->enemys != NULL)
 		ft_clear_lst_of_enemy(mlx_ptr, &field->enemys);
+	if (field->collectible != NULL)
+		ft_clear_lst_of_images(mlx_ptr, &field->collectible);
 	free(field);
 }

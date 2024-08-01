@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:37:10 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/31 16:38:09 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:52:40 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(void)
 
 	width = 1920;
 	height = 1080;
-	window = ft_window_init(width, height);
+	window = ft_window_init(width, height, "../maps/map1.ber");
 	if (window == NULL)
 	{
 		exit (EXIT_FAILURE);

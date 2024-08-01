@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:38:23 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/31 16:47:17 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 13:34:42 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_image	*init_sprite(void *mlx_ptr, int i, int x, int y)
 	return (NULL);
 }
 
-static void	ft_remove(void *mlx_ptr, t_list **lst, int x, int y)
+static void	ft_remove_enemy(void *mlx_ptr, t_list **lst, int x, int y)
 {
 	t_enemy	*tmp;
 	t_list	*prev;
@@ -99,11 +99,13 @@ void	ft_destroy_evil_ship_sprite(t_window *window, int x, int y)
 	{
 		ft_put_sprite(window, x, y, i);
 	}
-	ft_remove(window->mlx_ptr, &window->game_field->enemys, x, y);
+	ft_remove_enemy(window->mlx_ptr, &window->game_field->enemys, x, y);
 	window->game_field->game_field[y][x] = '0';
 	if (window->game_field->enemys == NULL)
 	{
-		window->game_field->exit_gate->is_visible = 1;
+		// window->game_field->exit_gate->is_visible = 1;
+		window->game_field->collectible = ft_collectible_init(window->mlx_ptr,
+				window->game_field);
 	}
 }
 

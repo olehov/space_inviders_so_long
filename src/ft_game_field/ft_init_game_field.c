@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:10:58 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:23:59 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:02:18 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,32 @@ t_image	**init_field_imgs(void *mlx_ptr, t_game_field *game_field)
 	return (field_imgs);
 }
 
-static t_game_field	*init_field(void *mlx_ptr, char *str, int counter)
+static t_game_field	*new_game_field(void)
 {
 	t_game_field	*game_field;
 
-	game_field = malloc(sizeof(t_game_field));
+	game_field = ft_calloc(sizeof(t_game_field), 1);
+	if (game_field == NULL)
+		return (NULL);
+	game_field->collectible = NULL;
+	game_field->enemys = NULL;
+	game_field->game_field = NULL;
+	game_field->game_field_imgs = NULL;
+	game_field->player = NULL;
+	return (game_field);
+}
+
+static t_game_field	*init_field(void *mlx_ptr, char *str, int height)
+{
+	t_game_field	*game_field;
+
+	game_field = new_game_field();
 	if (game_field == NULL)
 		return (free(str), NULL);
 	game_field->game_field = ft_split(str, '\n');
 	if (game_field->game_field == NULL)
 		return (free(str), free(game_field), NULL);
-	game_field->height = counter;
+	game_field->height = height;
 	game_field->width = ft_strlen(game_field->game_field[0]);
 	if (ft_check_valid_map(game_field) == -1)
 		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);

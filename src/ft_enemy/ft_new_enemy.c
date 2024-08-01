@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:45:54 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:17:24 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/01 13:03:18 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ t_enemy	*ft_new_enemy(void *mlx_ptr, int x, int y)
 	enemy->enemy_img->pos.y = y * IMAGE_SIZE;
 	enemy->pos.x = x;
 	enemy->pos.y = y;
-	enemy->is_destroyed = 0;
 	return (enemy);
 }

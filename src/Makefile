@@ -1,4 +1,4 @@
-SRCS = $(wildcard ./ft_window/*.c) $(wildcard ./ft_point/*.c) $(wildcard ./ft_player/*.c) $(wildcard ./ft_game_field/*.c) $(wildcard ./ft_exit_gate/*.c) $(wildcard ./ft_image/*.c) $(wildcard ./ft_utils/*.c) $(wildcard ./ft_enemy/*.c) render_window.c
+SRCS = $(wildcard ./ft_window/*.c) $(wildcard ./ft_point/*.c) $(wildcard ./ft_player/*.c) $(wildcard ./ft_game_field/*.c) $(wildcard ./ft_exit_gate/*.c) $(wildcard ./ft_image/*.c) $(wildcard ./ft_utils/*.c) $(wildcard ./ft_enemy/*.c) $(wildcard ./ft_collectible/*.c) render_window.c
 OBJS = ${SRCS:.c=.o}
 NAME = so_long.a
 FTLIBFTNAME = libft_ft.a
