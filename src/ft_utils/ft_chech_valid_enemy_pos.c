@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_player.c                                    :+:      :+:    :+:   */
+/*   ft_chech_valid_enemy_pos.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 16:35:24 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/03 14:29:06 by ogrativ          ###   ########.fr       */
+/*   Created: 2024/08/02 17:57:25 by ogrativ           #+#    #+#             */
+/*   Updated: 2024/08/02 18:08:11 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/so_long.h"
-#include <stdio.h>
+#include "../../headers/ft_map_utils.h"
 
-int	ft_put_player(t_window *window)
+int	ft_chech_valid_enemy_pos(t_game_field *game_field)
 {
-	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
-		window->game_field->player->player->img_ptr,
-		window->game_field->player->player->pos.x,
-		window->game_field->player->player->pos.y);
+	int	x;
+	int	y;
+
+	x = 0;
+	y = game_field->height - 2;
+	while (++x < game_field->width - 1)
+	{
+		if (game_field->game_field[y][x] == _evil_ship)
+		{
+			return (perror(RED "Error: " RESET "Not playable enemy position"),
+				-1);
+		}
+	}
 	return (0);
 }

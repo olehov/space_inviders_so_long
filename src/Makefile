@@ -19,14 +19,12 @@ $(NAME): makeftlibft $(OBJS)
 	$(LIBC) $(NAME) $(OBJS)
 
 run: $(NAME)
-	@rm -f a.out
-	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext
-	./a.out
+	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
+	./so_long
 
 run_leaks: $(NAME)
-	@rm -f a.out
-	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./a.out
+	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./so_long "../maps/valid/big_map.ber"
 
 makeftlibft:
 	@make -C $(LIBFTDIR)
@@ -38,6 +36,7 @@ clean:
 fclean: clean
 	@cd $(LIBFTDIR) && make fclean
 	@rm -f $(NAME) $(NAME) $(OBJSB)
+	@rm -f so_long
 	
 re: fclean all
 

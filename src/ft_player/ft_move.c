@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:32:45 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/01 14:02:34 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 14:58:08 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,56 +34,6 @@
 // 	}
 // 	printf("\n");
 // }
-
-static void	ft_remove_collectible(void *mlx_ptr, t_list **lst, int x, int y)
-{
-	t_image	*tmp;
-	t_list	*prev;
-	t_list	*curent;
-
-	prev = NULL;
-	curent = *lst;
-	while (curent != NULL)
-	{
-		tmp = (t_image *)curent->content;
-		if (tmp->pos.x == x && tmp->pos.y == y)
-		{
-			if (prev == NULL)
-				*lst = curent->next;
-			else
-				prev->next = curent->next;
-			ft_free_image(mlx_ptr, curent->content);
-			free(curent);
-			if (prev == NULL)
-				curent = *lst;
-			else
-				curent = prev->next;
-		}
-		else
-		{
-			prev = curent;
-			curent = curent->next;
-		}
-	}
-}
-
-static int	is_collectible(t_window *window)
-{
-	t_image	*img;
-	t_list	*tmp;
-
-	tmp = window->game_field->collectible;
-	while (tmp != NULL)
-	{
-		img = tmp->content;
-		if (ft_equal_pos(&window->game_field->player->player->pos, &img->pos))
-		{
-			return (1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 static int	is_died(t_window *window)
 {

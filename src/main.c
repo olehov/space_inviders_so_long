@@ -6,12 +6,13 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:37:10 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/01 16:52:40 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 17:36:38 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 #include "../ft_libft/headers/libft.h"
+#include "../headers/ft_map_utils.h"
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <stdio.h>
@@ -44,7 +45,7 @@ void	game(t_window *window)
 	mlx_loop(window->mlx_ptr);
 }
 
-int	main(void)
+int	main(int argv, char **args)
 {
 	int			width;
 	int			height;
@@ -52,12 +53,19 @@ int	main(void)
 
 	width = 1920;
 	height = 1080;
-	window = ft_window_init(width, height, "../maps/map1.ber");
-	if (window == NULL)
+	if (argv != 2)
+		window = ft_window_init(WINDOW_WIDTH, WINDOW_HEIGHT,
+				"../maps/valid/map1.ber");
+	else
 	{
-		exit (EXIT_FAILURE);
+		if (ft_check_valid_path(args[1]) == -1)
+			exit(EXIT_FAILURE);
+		window = ft_window_init(WINDOW_WIDTH, WINDOW_HEIGHT, args[1]);
 	}
+	if (window == NULL)
+		exit (EXIT_FAILURE);
 	put_game_exit(window);
+	put_game_field(window);
 	render_window(window);
 	game(window);
 	ft_close_window_w(window);

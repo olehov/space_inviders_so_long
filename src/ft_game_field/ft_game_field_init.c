@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_game_field.c                               :+:      :+:    :+:   */
+/*   ft_game_field_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:10:58 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/01 16:02:18 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 18:19:19 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_libft/headers/libft.h"
 #include "../../headers/so_long.h"
+#include "../../headers/ft_map_utils.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -20,89 +21,6 @@ static void	*ft_close_file(int fd)
 {
 	close(fd);
 	return (NULL);
-}
-
-static t_image	**allocate_field_img(int width, int height)
-{
-	t_image	**field_imgs;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	field_imgs = (t_image **)malloc(sizeof(t_image *) * height);
-	if (field_imgs == NULL)
-		return (NULL);
-	while (i < height)
-	{
-		field_imgs[i] = (t_image *)malloc(sizeof(t_image) * width);
-		if (field_imgs[i] == NULL)
-		{
-			while (j < i)
-			{
-				free(field_imgs[j]);
-				j++;
-			}
-			free(field_imgs);
-			return (NULL);
-		}
-		i++;
-	}
-	return (field_imgs);
-}
-
-static t_image	*init_borders(void *mlx_ptr, t_game_field *game_field,
-	int i, int j)
-{
-	if (i > 0 && i < game_field->height - 1 && j > 0
-		&& j < game_field->width - 1)
-		return (ft_new_image(mlx_ptr, BACKGROUND));
-	else if (i == 0 && j == 0)
-		return (ft_new_image(mlx_ptr, TOP_L_CORNER));
-	else if (i == game_field->height - 1 && j == game_field->width - 1)
-		return (ft_new_image(mlx_ptr, BOTTOM_R_CORNER));
-	else if (i == game_field->height - 1 && j == 0)
-		return (ft_new_image(mlx_ptr, BOTTOM_L_CORNER));
-	else if (i == 0 && j == game_field->width - 1)
-		return (ft_new_image(mlx_ptr, TOP_R_CORNER));
-	else if (j == 0 && i > 0 && i < game_field->height - 1)
-		return (ft_new_image(mlx_ptr, LEFT_V_LINE));
-	else if (j == game_field->width - 1 && i > 0 && i < game_field->height - 1)
-		return (ft_new_image(mlx_ptr, RIGHT_V_LINE));
-	else if (i == 0 && j > 0 && j < game_field->width - 1)
-		return (ft_new_image(mlx_ptr, TOP_H_LINE));
-	else if (i == game_field->height - 1 && j > 0 && j < game_field->width - 1)
-		return (ft_new_image(mlx_ptr, BOTTOM_H_LINE));
-	return (NULL);
-}
-
-t_image	**init_field_imgs(void *mlx_ptr, t_game_field *game_field)
-{
-	t_image	**field_imgs;
-	t_image	*new_img;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = -1;
-	field_imgs = allocate_field_img(game_field->width, game_field->height);
-	if (field_imgs == NULL)
-		return (NULL);
-	while (++i < game_field->height)
-	{
-		while (++j < game_field->width)
-		{
-			ft_set_position(&field_imgs[i][j].pos, j * IMAGE_SIZE + START_POS_X,
-				i * IMAGE_SIZE);
-			new_img = init_borders(mlx_ptr, game_field, i, j);
-			if (new_img == NULL)
-				return (free_imgs(mlx_ptr, game_field), NULL);
-			field_imgs[i][j].img_ptr = new_img->img_ptr;
-			free(new_img);
-		}
-		j = -1;
-	}
-	return (field_imgs);
 }
 
 static t_game_field	*new_game_field(void)
@@ -117,14 +35,13 @@ static t_game_field	*new_game_field(void)
 	game_field->game_field = NULL;
 	game_field->game_field_imgs = NULL;
 	game_field->player = NULL;
+	game_field->background = NULL;
 	return (game_field);
 }
 
-static t_game_field	*init_field(void *mlx_ptr, char *str, int height)
+static void	*init_gamefield(void *mlx_ptr, char *str, int height,
+		t_game_field *game_field)
 {
-	t_game_field	*game_field;
-
-	game_field = new_game_field();
 	if (game_field == NULL)
 		return (free(str), NULL);
 	game_field->game_field = ft_split(str, '\n');
@@ -134,6 +51,23 @@ static t_game_field	*init_field(void *mlx_ptr, char *str, int height)
 	game_field->width = ft_strlen(game_field->game_field[0]);
 	if (ft_check_valid_map(game_field) == -1)
 		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
+	game_field->background = ft_screen_background(mlx_ptr,
+			(game_field->width - 2) * IMAGE_SIZE,
+			(game_field->height - 2) * IMAGE_SIZE);
+	if (game_field->background == NULL)
+		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
+	game_field->background->pos.x = START_POS_X + IMAGE_SIZE;
+	game_field->background->pos.y = IMAGE_SIZE;
+	return (game_field);
+}
+
+static t_game_field	*init_field(void *mlx_ptr, char *str, int height)
+{
+	t_game_field	*game_field;
+
+	game_field = new_game_field();
+	if (init_gamefield(mlx_ptr, str, height, game_field) == NULL)
+		return (NULL);
 	game_field->game_field_imgs = init_field_imgs(mlx_ptr, game_field);
 	if (game_field->game_field_imgs == NULL)
 		return (free(str), ft_free_game_field(mlx_ptr, game_field), NULL);
@@ -149,7 +83,7 @@ static t_game_field	*init_field(void *mlx_ptr, char *str, int height)
 	return (free(str), game_field);
 }
 
-t_game_field	*ft_init_game_field(void *mlx_ptr, const char *map_path)
+t_game_field	*ft_game_field_init(void *mlx_ptr, const char *map_path)
 {
 	char			*str;
 	char			*tmp;
@@ -158,15 +92,15 @@ t_game_field	*ft_init_game_field(void *mlx_ptr, const char *map_path)
 
 	counter = 0;
 	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		return (perror(RED "Error: " RESET "File not found"), NULL);
 	tmp = get_next_line(fd);
-	if (tmp == NULL)
-		return (ft_close_file(fd));
+	if (tmp == NULL || tmp[0] != '1')
+		return (perror(RED "Error: " RESET "Map not found"),
+			ft_close_file(fd));
 	str = ft_calloc(1, 1);
 	if (str == NULL)
-	{
-		free(tmp);
-		return (ft_close_file(fd));
-	}
+		return (free(tmp), ft_close_file(fd));
 	while (tmp != NULL)
 	{
 		str = ft_join_and_free(str, tmp);

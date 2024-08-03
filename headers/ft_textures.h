@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:26:13 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/07/30 15:21:52 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 14:08:02 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /*Textures size*/
 # define IMAGE_SIZE 32
-# define START_POS_X 300
+# define START_POS_X 200
 
 /*Portal textures*/
 # define EXIT_PORTAL_1 "../textures/xpm/portal/portal0.xpm"

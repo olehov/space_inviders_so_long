@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:38:23 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/01 13:34:42 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 15:01:10 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,6 @@ static t_image	*init_sprite(void *mlx_ptr, int i, int x, int y)
 		return (img);
 	}
 	return (NULL);
-}
-
-static void	ft_remove_enemy(void *mlx_ptr, t_list **lst, int x, int y)
-{
-	t_enemy	*tmp;
-	t_list	*prev;
-	t_list	*curent;
-
-	prev = NULL;
-	curent = *lst;
-	while (curent != NULL)
-	{
-		tmp = (t_enemy *)curent->content;
-		if (tmp->pos.x == x && tmp->pos.y == y)
-		{
-			if (prev == NULL)
-				*lst = curent->next;
-			else
-				prev->next = curent->next;
-			ft_free_enemy(mlx_ptr, curent->content);
-			free(curent);
-			if (prev == NULL)
-				curent = *lst;
-			else
-				curent = prev->next;
-		}
-		else
-		{
-			prev = curent;
-			curent = curent->next;
-		}
-	}
 }
 
 static int	ft_put_sprite(t_window *window, int x, int y, int i)
@@ -103,7 +71,6 @@ void	ft_destroy_evil_ship_sprite(t_window *window, int x, int y)
 	window->game_field->game_field[y][x] = '0';
 	if (window->game_field->enemys == NULL)
 	{
-		// window->game_field->exit_gate->is_visible = 1;
 		window->game_field->collectible = ft_collectible_init(window->mlx_ptr,
 				window->game_field);
 	}
@@ -148,8 +115,6 @@ void	ft_shoot(t_window *window)
 			ft_destroy_evil_ship_sprite(window, shoot->pos.x, y);
 			break ;
 		}
-		else if (window->game_field->game_field[y][shoot->pos.x] == '1')
-			put_laser(window, shoot);
 		put_laser(window, shoot);
 		y--;
 	}

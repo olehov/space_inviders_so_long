@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:50:41 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/01 13:52:15 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 16:42:02 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,12 @@ void	put_number_of_movements(t_window *window)
 
 void	render_window(t_window *window)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->background->img_ptr, 0, 0);
-	while (i < window->game_field->height)
-	{
-		while (j < window->game_field->width)
-		{
-			mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
-				window->game_field->game_field_imgs[i][j].img_ptr,
-				window->game_field->game_field_imgs[i][j].pos.x,
-				window->game_field->game_field_imgs[i][j].pos.y);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
+	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
+		window->game_field->background->img_ptr,
+		window->game_field->background->pos.x,
+		window->game_field->background->pos.y);
 	ft_put_player(window);
 	put_number_of_movements(window);
 	ft_put_enemy(window);

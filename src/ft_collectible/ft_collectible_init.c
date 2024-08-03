@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:03:08 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/01 14:00:41 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/03 14:33:11 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,11 @@ static void	*ft_collectible(void *mlx_ptr, t_list **lst, int j, int i)
 					COLLECTIBLE)));
 	last = ft_lstlast(*lst);
 	tmp = last->content;
-	if (tmp->pos.x == 0 && tmp->pos.y == 0)
-	{
-		tmp->pos.x = x;
-		tmp->pos.y = y;
-		last->content = tmp;
-	}
-	else
+	if (tmp->pos.x != 0 && tmp->pos.y != 0)
 		return (ft_clear_lst_of_images(mlx_ptr, lst), NULL);
+	tmp->pos.x = x;
+	tmp->pos.y = y;
+	last->content = tmp;
 	return (*lst);
 }
 
