@@ -26,6 +26,22 @@ run_leaks: $(NAME)
 	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./so_long "../maps/valid/big_map.ber"
 
+run_empty_map: $(NAME)
+	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./so_long "../maps/invalid/empty_map.ber"
+
+run_invalid_map_1: $(NAME)
+	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./so_long "../maps/invalid/invalid_map1.ber"
+
+run_invalid_map_2: $(NAME)
+	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./so_long "../maps/invalid/invalid_map2.ber"
+
+run_invalid_map_3: $(NAME)
+	$(CC) $(GFLAGS) main.c $(NAME) -Lminilibx-linux -lmlx_Linux -lX11 -lXext -o so_long
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./so_long "../maps/invalid/invalid_map3.ber"
+
 makeftlibft:
 	@make -C $(LIBFTDIR)
 
@@ -40,4 +56,4 @@ fclean: clean
 	
 re: fclean all
 
-.PHONY: all test clean fclean re
+.PHONY: all test clean fclean re 

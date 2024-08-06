@@ -6,7 +6,7 @@
 /*   By: ogrativ <ogrativ@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:10:58 by ogrativ           #+#    #+#             */
-/*   Updated: 2024/08/03 18:19:19 by ogrativ          ###   ########.fr       */
+/*   Updated: 2024/08/05 14:11:57 by ogrativ          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static t_game_field	*init_field(void *mlx_ptr, char *str, int height)
 {
 	t_game_field	*game_field;
 
+	if (str == NULL || str[0] == ' ' || str[0] == '\n')
+		return (perror(RED "Error: " RESET "Found space"), free(str), NULL);
 	game_field = new_game_field();
 	if (init_gamefield(mlx_ptr, str, height, game_field) == NULL)
 		return (NULL);
@@ -95,7 +97,7 @@ t_game_field	*ft_game_field_init(void *mlx_ptr, const char *map_path)
 	if (fd == -1)
 		return (perror(RED "Error: " RESET "File not found"), NULL);
 	tmp = get_next_line(fd);
-	if (tmp == NULL || tmp[0] != '1')
+	if (tmp == NULL)
 		return (perror(RED "Error: " RESET "Map not found"),
 			ft_close_file(fd));
 	str = ft_calloc(1, 1);
